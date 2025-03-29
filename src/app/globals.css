@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFF5E4;
+  --foreground: #6A9C89;
+  --primary: #FFA725;
+  --primary-hover: #e79620;
+  --active-highlight: #C1D8C3;
+  --secondary: #6A9C89;
+  --secondary-light: #C1D8C3;
+  --accent: #FFA725;
+  --neutral-light: #FFF5E4;
+  --neutral-dark: #6A9C89;
 }
 
 @theme inline {
@@ -14,8 +22,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #6A9C89;
+    --foreground: #FFF5E4;
+    --active-highlight: #C1D8C3;
+    --secondary: #C1D8C3;
+    --secondary-light: #6A9C89;
   }
 }
 
@@ -23,4 +34,40 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Animation classes */
+.highlight-animation {
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.code-line {
+  font-family: monospace;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.code-line.active {
+  background-color: var(--active-highlight);
+  opacity: 1;
+}
+
+.code-line:not(.active) {
+  opacity: 0.6;
+}
+
+/* Dropzone styles */
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropzone:hover {
+  border-color: var(--primary);
+  background-color: rgba(255, 167, 37, 0.05);
 }
