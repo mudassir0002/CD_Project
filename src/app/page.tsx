@@ -621,7 +621,7 @@ function processBlocks(blocks: CodeBlock[], tac: TACStep[], lineNumberStart: num
             if (child.type === 'assignment') {
               const assignmentMatch = child.content.match(/(\w+)\s*=\s*(.*)/);
               if (assignmentMatch) {
-                const [_, target, expr] = assignmentMatch;
+                const [ target, expr] = assignmentMatch;
                 tac.push({ 
                   line: lineNumber++, 
                   code: `T${tempCounter}=${expr.trim()}` 
