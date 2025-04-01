@@ -95,7 +95,7 @@ export default function Home() {
   };
 
   // Get the current active step
-  const activeStep = tacCode[currentStep];
+
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -245,7 +245,7 @@ function ExecutionPreview({ tacCode, currentStep, originalCode }: {
 }) {
   // Determine what's happening at the current step
   const currentTac = tacCode[currentStep];
-  const nextTac = currentStep < tacCode.length - 1 ? tacCode[currentStep + 1] : null;
+  //const nextTac = currentStep < tacCode.length - 1 ? tacCode[currentStep + 1] : null;
   
   // Parse the flow type
   const isIfStatement = currentTac?.code.startsWith('if');
@@ -424,8 +424,8 @@ function isCurrentExecutingLine(line: string, currentTac: TACStep | undefined): 
 function parseCode(input: string): TACStep[] {
   const lines = input.trim().split('\n');
   const tac: TACStep[] = [];
-  let lineNumber = 1;
-  let tempCounter = 1;
+  const lineNumber = 1;
+  const tempCounter = 1;
   
   // Analyze the structure first (find if-else blocks, etc.)
   const structuredCode = analyzeCodeStructure(lines);
@@ -503,7 +503,7 @@ function analyzeCodeStructure(lines: string[]): CodeBlock[] {
         // Handle assignments inside the if block
         const assignmentMatch = bodyLine.match(/(\w+)\s*=\s*(.*)/);
         if (assignmentMatch) {
-          const [_, target, expr] = assignmentMatch;
+          //const [_, target, expr] = assignmentMatch;
           ifBlock.children!.push({
             type: 'assignment',
             content: bodyLine,
@@ -553,7 +553,7 @@ function analyzeCodeStructure(lines: string[]): CodeBlock[] {
           // Handle assignments inside the else block
           const assignmentMatch = elseBodyLine.match(/(\w+)\s*=\s*(.*)/);
           if (assignmentMatch) {
-            const [_, target, expr] = assignmentMatch;
+            //const [_, target, expr] = assignmentMatch;
             elseBlock.children!.push({
               type: 'assignment',
               content: elseBodyLine,
@@ -597,7 +597,7 @@ function processBlocks(blocks: CodeBlock[], tac: TACStep[], lineNumberStart: num
   blocks.forEach(block => {
     if (block.type === 'if') {
       // Generate TAC for if statement
-      const ifStartLine = lineNumber;
+      //const ifStartLine = lineNumber;
       const hasElse = !!block.elseBlock;
       
       if (hasElse) {
@@ -649,7 +649,7 @@ function processBlocks(blocks: CodeBlock[], tac: TACStep[], lineNumberStart: num
             if (child.type === 'assignment') {
               const assignmentMatch = child.content.match(/(\w+)\s*=\s*(.*)/);
               if (assignmentMatch) {
-                const [_, target, expr] = assignmentMatch;
+                const [ target, expr] = assignmentMatch;
                 tac.push({ 
                   line: lineNumber++, 
                   code: `T${tempCounter}=${expr.trim()}` 
@@ -679,7 +679,7 @@ function processBlocks(blocks: CodeBlock[], tac: TACStep[], lineNumberStart: num
             if (child.type === 'assignment') {
               const assignmentMatch = child.content.match(/(\w+)\s*=\s*(.*)/);
               if (assignmentMatch) {
-                const [_, target, expr] = assignmentMatch;
+                const [ target, expr] = assignmentMatch;
                 tac.push({ 
                   line: lineNumber++, 
                   code: `T${tempCounter}=${expr.trim()}` 
@@ -697,7 +697,7 @@ function processBlocks(blocks: CodeBlock[], tac: TACStep[], lineNumberStart: num
       // Direct assignment outside of blocks
       const assignmentMatch = block.content.match(/(\w+)\s*=\s*(.*)/);
       if (assignmentMatch) {
-        const [_, target, expr] = assignmentMatch;
+        const [target, expr] = assignmentMatch;
         tac.push({ 
           line: lineNumber++, 
           code: `T${tempCounter}=${expr.trim()}` 
