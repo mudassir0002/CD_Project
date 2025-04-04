@@ -10,7 +10,7 @@ interface TACStep {
   isActive?: boolean;
 }
 
-// Sample input code for new users
+// Sample input code for new user
 const SAMPLE_CODE = `if (a<5)
 {
   c= b+d
